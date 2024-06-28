@@ -550,6 +550,16 @@
           "type": "boolean",
           "default": false,
           "description": "Only use the icon aliases. Non aliased icons will be ignored."
+        },
+        "iconify.iconPropNames": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": [
+            "icon"
+          ],
+          "description": "Array of prop names for which icon IntelliSense should be enabled."
         }
       }
     }

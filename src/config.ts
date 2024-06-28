@@ -58,6 +58,7 @@ export const config = reactive({
   customCollectionIdsMap: createConfigRef(`${EXT_NAMESPACE}.customCollectionIdsMap`, {} as Record<string, string | undefined>),
   customAliasesJsonPaths: createConfigRef(`${EXT_NAMESPACE}.customAliasesJsonPaths`, []),
   customAliasesOnly: createConfigRef(`${EXT_NAMESPACE}.customAliasesOnly`, false),
+  iconPropNames: createConfigRef(`${EXT_NAMESPACE}.iconPropNames`, ['icon']),
 })
 
 export const customCollections = ref([] as IconifyJSON[])
@@ -181,6 +182,8 @@ export const enabledAliasIds = computed(() => {
 export function isCustomAliasesFile(path: string) {
   return customAliasesFiles.value.includes(path)
 }
+
+export const REGEX_COLLECTION = computed(() => new RegExp(`(?:${config.iconPropNames.join('|')})=['"][\w-]*$`))
 
 const RE_PART_DELIMITERS = computed(() => `(${config.delimiters.map(i => escapeRegExp(i)).join('|')})`)
 

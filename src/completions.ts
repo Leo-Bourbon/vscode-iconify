@@ -1,7 +1,7 @@
 import type { CompletionItemProvider, ExtensionContext, TextDocument } from 'vscode'
 import { CompletionItem, CompletionItemKind, Position, Range, languages } from 'vscode'
 import { getCollectionMarkdown, getIconMarkdown } from './markdown'
-import { REGEX_NAMESPACE, REGEX_PREFIXED, config, enabledAliasIds, enabledCollectionIds, enabledCollections } from './config'
+import { REGEX_COLLECTION, REGEX_NAMESPACE, REGEX_PREFIXED, config, enabledAliasIds, enabledCollectionIds, enabledCollections } from './config'
 
 export function RegisterCompletion(ctx: ExtensionContext) {
   const iconProvider: CompletionItemProvider = {
@@ -51,12 +51,11 @@ export function RegisterCompletion(ctx: ExtensionContext) {
     },
   }
 
-  const REGEX_COLLECTION = /icon=['"][\w-]*$/
-
   const collectionProvider: CompletionItemProvider = {
     provideCompletionItems(document: TextDocument, position: Position) {
       const line = document.getText(new Range(new Position(position.line, 0), new Position(position.line, position.character)))
-      const match = REGEX_COLLECTION.test(line)
+      // const match = REGEX_COLLECTION.test(line)
+      const match = REGEX_COLLECTION.value.test(line)
       if (!match)
         return null
 
